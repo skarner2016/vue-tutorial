@@ -59,6 +59,22 @@ watch(status, (newValue, oldValue) => {
     deep: true
 })
 
+// 5. 精确监听
+const info = ref({name: 'skarner', age:18})
+const appendInfoName = () => {
+    info.value.name += "p"
+}
+const addInfoAge = () => {
+    info.value.age ++
+}
+
+watch(
+    () => info.value.name,
+    (newName, oldName) => {
+        console.log('name 变化了', newName, oldName)
+    }
+)
+
 </script>
 
 <template>
@@ -75,5 +91,10 @@ watch(status, (newValue, oldValue) => {
 
   <div>
     <button @click="addStatusCount">deep: {{ status.count }}</button>
+  </div>
+
+  <div>
+    <button @click="appendInfoName">info.name: {{ info.name }}</button>
+    <button @click="addInfoAge">info.age: {{ info.age }}</button>
   </div>
 </template>
